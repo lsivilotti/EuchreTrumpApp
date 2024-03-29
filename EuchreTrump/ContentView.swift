@@ -10,11 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @State var suit: String = "___"
     @State var coSuit: String = "___"
-    @State var spadesSelected: Bool = false
-    @State var clubsSelected: Bool = false
-    @State var heartsSelected: Bool = false
-    @State var diamondsSelected: Bool = false
     @State var suitColor: Color = .white
+    enum suits {
+        case spades, clubs, hearts, diamonds, none
+    }
+    @State var trump = suits.none
 
     var body: some View {
         ZStack {
@@ -96,21 +96,19 @@ struct ContentView: View {
                                 .foregroundStyle(.white)
                             }
                             .onTapGesture {
-                                spadesSelected.toggle()
-                                if(spadesSelected) {
-                                    clubsSelected = false
-                                    heartsSelected = false
-                                    diamondsSelected = false
-                                    suit = "spade"
-                                    coSuit = "club"
-                                    suitColor = .black
-                                } else {
+                                if(trump == .spades) {
+                                    trump = .none
                                     suit = "___"
                                     coSuit = "___"
                                     suitColor = .white
+                                } else {
+                                    trump = .spades
+                                    suit = "spade"
+                                    coSuit = "club"
+                                    suitColor = .black
                                 }
                             }
-                            .opacity(spadesSelected ? 0.5 : 1)
+                            .opacity(trump == .spades ? 0.5 : 1)
                         RoundedRectangle(cornerRadius: 25.0)
                             .frame(width: 190, height: 50, alignment: .center)
                             .overlay {
@@ -126,21 +124,19 @@ struct ContentView: View {
                                 .foregroundStyle(.white)
                             }
                             .onTapGesture {
-                                clubsSelected.toggle()
-                                if(clubsSelected) {
-                                    spadesSelected = false
-                                    heartsSelected = false
-                                    diamondsSelected = false
-                                    suit = "club"
-                                    coSuit = "spade"
-                                    suitColor = .black
-                                } else {
+                                if(trump == .clubs) {
+                                    trump = .none
                                     suit = "___"
                                     coSuit = "___"
                                     suitColor = .white
+                                } else {
+                                    trump = .clubs
+                                    suit = "club"
+                                    coSuit = "spade"
+                                    suitColor = .black
                                 }
                             }
-                            .opacity(clubsSelected ? 0.5 : 1)
+                            .opacity(trump == .clubs ? 0.5 : 1)
                     }
                     .foregroundStyle(.black)
                     VStack {
@@ -159,21 +155,19 @@ struct ContentView: View {
                                 .foregroundStyle(.white)
                             }
                             .onTapGesture {
-                                heartsSelected.toggle()
-                                if(heartsSelected) {
-                                    spadesSelected = false
-                                    clubsSelected = false
-                                    diamondsSelected = false
-                                    suit = "heart"
-                                    coSuit = "diamond"
-                                    suitColor = .red
-                                } else {
+                                if(trump == .hearts) {
+                                    trump = .none
                                     suit = "___"
                                     coSuit = "___"
                                     suitColor = .white
+                                } else {
+                                    trump = .hearts
+                                    suit = "heart"
+                                    coSuit = "diamond"
+                                    suitColor = .red
                                 }
                             }
-                            .opacity(heartsSelected ? 0.5 : 1)
+                            .opacity(trump == .hearts ? 0.5 : 1)
                         RoundedRectangle(cornerRadius: 25.0)
                             .frame(width: 190, height: 50, alignment: .center)
                             .overlay {
@@ -189,21 +183,19 @@ struct ContentView: View {
                                 .foregroundStyle(.white)
                             }
                             .onTapGesture {
-                                diamondsSelected.toggle()
-                                if(diamondsSelected) {
-                                    spadesSelected = false
-                                    clubsSelected = false
-                                    heartsSelected = false
-                                    suit = "diamond"
-                                    coSuit = "heart"
-                                    suitColor = .red
-                                } else {
+                                if(trump == .diamonds) {
+                                    trump = .none
                                     suit = "___"
                                     coSuit = "___"
                                     suitColor = .white
+                                } else {
+                                    trump = .diamonds
+                                    suit = "diamond"
+                                    coSuit = "heart"
+                                    suitColor = .red
                                 }
                             }
-                            .opacity(diamondsSelected ? 0.5 : 1)
+                            .opacity(trump == .diamonds ? 0.5 : 1)
                     }
                     .foregroundStyle(.red)
                 }
