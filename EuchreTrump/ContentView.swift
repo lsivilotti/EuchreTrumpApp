@@ -78,103 +78,43 @@ struct ContentView: View {
                 Spacer()
                 HStack {
                     VStack {
-                        RoundedRectangle(cornerRadius: 25.0)
-                            .frame(width: 190, height: 50, alignment: .center)
-                            .overlay {
-                                HStack {
-                                    Image(systemName: suitIcon(suit: .spades))
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 45)
-                                    Text("Spades")
-                                        .fontWeight(.black)
-                                        .font(.title)
-                                }
-                                .foregroundStyle(.white)
-                            }
-                            .onTapGesture {
-                                if(trump == .spades) {
-                                    trump = .none
-                                } else {
-                                    trump = .spades
-                                }
-                            }
-                            .opacity(trump == .spades ? 0.5 : 1)
-                        RoundedRectangle(cornerRadius: 25.0)
-                            .frame(width: 190, height: 50, alignment: .center)
-                            .overlay {
-                                HStack {
-                                    Image(systemName: suitIcon(suit: .clubs))
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 45)
-                                    Text("Clubs")
-                                        .fontWeight(.black)
-                                        .font(.title)
-                                }
-                                .foregroundStyle(.white)
-                            }
-                            .onTapGesture {
-                                if(trump == .clubs) {
-                                    trump = .none
-                                } else {
-                                    trump = .clubs
-                                }
-                            }
-                            .opacity(trump == .clubs ? 0.5 : 1)
+                        suitButton(suit: .spades)
+                        suitButton(suit: .clubs)
                     }
-                    .foregroundStyle(.black)
                     VStack {
-                        RoundedRectangle(cornerRadius: 25.0)
-                            .frame(width: 190, height: 50, alignment: .center)
-                            .overlay {
-                                HStack {
-                                    Image(systemName: suitIcon(suit: .hearts))
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 45)
-                                    Text("Hearts")
-                                        .fontWeight(.black)
-                                        .font(.title)
-                                }
-                                .foregroundStyle(.white)
-                            }
-                            .onTapGesture {
-                                if(trump == .hearts) {
-                                    trump = .none
-                                } else {
-                                    trump = .hearts
-                                }
-                            }
-                            .opacity(trump == .hearts ? 0.5 : 1)
-                        RoundedRectangle(cornerRadius: 25.0)
-                            .frame(width: 190, height: 50, alignment: .center)
-                            .overlay {
-                                HStack {
-                                    Image(systemName: suitIcon(suit: .diamonds))
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 45)
-                                    Text("Diamonds")
-                                        .fontWeight(.black)
-                                        .font(.title)
-                                }
-                                .foregroundStyle(.white)
-                            }
-                            .onTapGesture {
-                                if(trump == .diamonds) {
-                                    trump = .none
-                                } else {
-                                    trump = .diamonds
-                                }
-                            }
-                            .opacity(trump == .diamonds ? 0.5 : 1)
+                        suitButton(suit: .hearts)
+                        suitButton(suit: .diamonds)
                     }
-                    .foregroundStyle(.red)
                 }
             }
         }
         .background(color(suit: trump))
+    }
+    
+    func suitButton(suit:Suits) -> some View {
+        return RoundedRectangle(cornerRadius: 25.0)
+            .frame(width: 190, height: 50, alignment: .center)
+            .overlay {
+                HStack {
+                    Image(systemName: suitIcon(suit: suit))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 45)
+                    Text(suitName(suit: suit).capitalized)
+                        .fontWeight(.black)
+                        .font(.title)
+                }
+                .foregroundStyle(.white)
+            }
+            .onTapGesture {
+                if(trump == suit) {
+                    trump = .none
+                } else {
+                    trump = suit
+                }
+            }
+            .opacity(trump == suit ? 0.5 : 1)
+            .foregroundStyle(color(suit: suit))
     }
     
     func color(suit:Suits) -> Color {
