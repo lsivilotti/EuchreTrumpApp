@@ -11,10 +11,10 @@ struct ContentView: View {
     @State var suit: String = "___"
     @State var coSuit: String = "___"
     @State var suitColor: Color = .white
-    enum suits {
+    enum Suits {
         case spades, clubs, hearts, diamonds, none
     }
-    @State var trump = suits.none
+    @State var trump = Suits.none
 
     var body: some View {
         ZStack {
@@ -42,7 +42,7 @@ struct ContentView: View {
                             title: { Text("Jack") },
                             icon: { Image(systemName: "suit.\(suit).fill") }
                         )
-                        .foregroundStyle(suitColor)
+                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("Jack") },
                             icon: { Image(systemName: "suit.\(coSuit).fill") }
@@ -53,31 +53,31 @@ struct ContentView: View {
                             title: { Text("Ace") },
                             icon: { Image(systemName: "suit.\(suit).fill") }
                         )
-                        .foregroundStyle(suitColor)
+                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("King") },
                             icon: { Image(systemName: "suit.\(suit).fill") }
                         )
-                        .foregroundStyle(suitColor)
+                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("Queen") },
                             icon: { Image(systemName: "suit.\(suit).fill") }
                         )
-                        .foregroundStyle(suitColor)
+                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("10") },
                             icon: { Image(systemName: "suit.\(suit).fill") }
                         )
-                        .foregroundStyle(suitColor)
+                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("9") },
                             icon: { Image(systemName: "suit.\(suit).fill") }
                         )
-                        .foregroundStyle(suitColor)
+                        .foregroundStyle(color(suit: trump))
                     }
                     Spacer()
                 }
-                .opacity(suitColor == .white ? 0.0 : 1)
+                .opacity(trump == .none ? 0.0 : 1)
                 Spacer()
                 HStack {
                     VStack {
@@ -100,12 +100,10 @@ struct ContentView: View {
                                     trump = .none
                                     suit = "___"
                                     coSuit = "___"
-                                    suitColor = .white
                                 } else {
                                     trump = .spades
                                     suit = "spade"
                                     coSuit = "club"
-                                    suitColor = .black
                                 }
                             }
                             .opacity(trump == .spades ? 0.5 : 1)
@@ -128,12 +126,10 @@ struct ContentView: View {
                                     trump = .none
                                     suit = "___"
                                     coSuit = "___"
-                                    suitColor = .white
                                 } else {
                                     trump = .clubs
                                     suit = "club"
                                     coSuit = "spade"
-                                    suitColor = .black
                                 }
                             }
                             .opacity(trump == .clubs ? 0.5 : 1)
@@ -159,12 +155,10 @@ struct ContentView: View {
                                     trump = .none
                                     suit = "___"
                                     coSuit = "___"
-                                    suitColor = .white
                                 } else {
                                     trump = .hearts
                                     suit = "heart"
                                     coSuit = "diamond"
-                                    suitColor = .red
                                 }
                             }
                             .opacity(trump == .hearts ? 0.5 : 1)
@@ -187,12 +181,10 @@ struct ContentView: View {
                                     trump = .none
                                     suit = "___"
                                     coSuit = "___"
-                                    suitColor = .white
                                 } else {
                                     trump = .diamonds
                                     suit = "diamond"
                                     coSuit = "heart"
-                                    suitColor = .red
                                 }
                             }
                             .opacity(trump == .diamonds ? 0.5 : 1)
@@ -201,7 +193,18 @@ struct ContentView: View {
                 }
             }
         }
-        .background(suitColor)
+        .background(color(suit: trump))
+    }
+    
+    func color(suit:Suits) -> Color {
+        switch(suit) {
+        case .clubs, .spades:
+            return .black
+        case .hearts, .diamonds:
+            return .red
+        case .none:
+            return .white
+        }
     }
 }
 
