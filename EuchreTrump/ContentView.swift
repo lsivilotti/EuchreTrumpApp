@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var suit: String = "___"
-    @State var coSuit: String = "___"
-    @State var suitColor: Color = .white
     enum Suits {
         case spades, clubs, hearts, diamonds, none
     }
@@ -26,8 +23,8 @@ struct ContentView: View {
                 Text("Euchre")
                     .font(.largeTitle)
                     .fontWeight(.black)
-                    .foregroundStyle(suit == "___" ? Color(red: 0.4, green: 0.6, blue: 1) : Color(red: 0.7, green: 0.9, blue: 1))
-                Text("Trump is \(suit != "___" ? "\(suit)s" : "undecided")")
+                    .foregroundStyle(trump == .none ? Color(red: 0.4, green: 0.6, blue: 1) : Color(red: 0.7, green: 0.9, blue: 1))
+                Text("Trump is \(suitName(suit: trump))")
                     .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
                     .font(.title)
                     .background(Capsule().foregroundStyle(.white))
@@ -45,7 +42,7 @@ struct ContentView: View {
                         .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("Jack") },
-                            icon: { Image(systemName: "suit.\(coSuit).fill") }
+                            icon: { Image(systemName: coSuitIcon(suit: trump)) }
                         )
                         .foregroundStyle(Color(red: 0.5, green: 0.3, blue: 1))
                         .fontWeight(.heavy)
@@ -98,12 +95,8 @@ struct ContentView: View {
                             .onTapGesture {
                                 if(trump == .spades) {
                                     trump = .none
-                                    suit = "___"
-                                    coSuit = "___"
                                 } else {
                                     trump = .spades
-                                    suit = "spade"
-                                    coSuit = "club"
                                 }
                             }
                             .opacity(trump == .spades ? 0.5 : 1)
@@ -124,12 +117,8 @@ struct ContentView: View {
                             .onTapGesture {
                                 if(trump == .clubs) {
                                     trump = .none
-                                    suit = "___"
-                                    coSuit = "___"
                                 } else {
                                     trump = .clubs
-                                    suit = "club"
-                                    coSuit = "spade"
                                 }
                             }
                             .opacity(trump == .clubs ? 0.5 : 1)
@@ -153,12 +142,8 @@ struct ContentView: View {
                             .onTapGesture {
                                 if(trump == .hearts) {
                                     trump = .none
-                                    suit = "___"
-                                    coSuit = "___"
                                 } else {
                                     trump = .hearts
-                                    suit = "heart"
-                                    coSuit = "diamond"
                                 }
                             }
                             .opacity(trump == .hearts ? 0.5 : 1)
@@ -179,12 +164,8 @@ struct ContentView: View {
                             .onTapGesture {
                                 if(trump == .diamonds) {
                                     trump = .none
-                                    suit = "___"
-                                    coSuit = "___"
                                 } else {
                                     trump = .diamonds
-                                    suit = "diamond"
-                                    coSuit = "heart"
                                 }
                             }
                             .opacity(trump == .diamonds ? 0.5 : 1)
@@ -219,6 +200,36 @@ struct ContentView: View {
             return "suit.diamond.fill"
         case .none:
             return "questionmark"
+        }
+    }
+    
+    func coSuitIcon(suit:Suits) -> String {
+        switch(suit){
+        case .spades:
+            return "suit.club.fill"
+        case .clubs:
+            return "suit.spade.fill"
+        case .hearts:
+            return "suit.diamond.fill"
+        case .diamonds:
+            return "suit.heart.fill"
+        case .none:
+            return "questionmark"
+        }
+    }
+    
+    func suitName(suit:Suits) -> String {
+        switch(suit){
+        case .spades:
+            return "spades"
+        case .clubs:
+            return "clubs"
+        case .hearts:
+            return "hearts"
+        case .diamonds:
+            return "diamonds"
+        case .none:
+            return "undecided"
         }
     }
 }
