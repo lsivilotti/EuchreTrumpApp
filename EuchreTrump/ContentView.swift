@@ -18,7 +18,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Image(systemName: suit == "___" ? "questionmark" : "suit.\(suit).fill")
+            Image(systemName: suitIcon(suit: trump))
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.white)
@@ -40,7 +40,7 @@ struct ContentView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Label(
                             title: { Text("Jack") },
-                            icon: { Image(systemName: "suit.\(suit).fill") }
+                            icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
                         .foregroundStyle(color(suit: trump))
                         Label(
@@ -51,27 +51,27 @@ struct ContentView: View {
                         .fontWeight(.heavy)
                         Label(
                             title: { Text("Ace") },
-                            icon: { Image(systemName: "suit.\(suit).fill") }
+                            icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
                         .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("King") },
-                            icon: { Image(systemName: "suit.\(suit).fill") }
+                            icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
                         .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("Queen") },
-                            icon: { Image(systemName: "suit.\(suit).fill") }
+                            icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
                         .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("10") },
-                            icon: { Image(systemName: "suit.\(suit).fill") }
+                            icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
                         .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("9") },
-                            icon: { Image(systemName: "suit.\(suit).fill") }
+                            icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
                         .foregroundStyle(color(suit: trump))
                     }
@@ -85,7 +85,7 @@ struct ContentView: View {
                             .frame(width: 190, height: 50, alignment: .center)
                             .overlay {
                                 HStack {
-                                    Image(systemName: "suit.spade.fill")
+                                    Image(systemName: suitIcon(suit: .spades))
                                         .resizable()
                                         .scaledToFit()
                                         .frame(height: 45)
@@ -111,7 +111,7 @@ struct ContentView: View {
                             .frame(width: 190, height: 50, alignment: .center)
                             .overlay {
                                 HStack {
-                                    Image(systemName: "suit.club.fill")
+                                    Image(systemName: suitIcon(suit: .clubs))
                                         .resizable()
                                         .scaledToFit()
                                         .frame(height: 45)
@@ -140,7 +140,7 @@ struct ContentView: View {
                             .frame(width: 190, height: 50, alignment: .center)
                             .overlay {
                                 HStack {
-                                    Image(systemName: "suit.heart.fill")
+                                    Image(systemName: suitIcon(suit: .hearts))
                                         .resizable()
                                         .scaledToFit()
                                         .frame(height: 45)
@@ -166,7 +166,7 @@ struct ContentView: View {
                             .frame(width: 190, height: 50, alignment: .center)
                             .overlay {
                                 HStack {
-                                    Image(systemName: "suit.diamond.fill")
+                                    Image(systemName: suitIcon(suit: .diamonds))
                                         .resizable()
                                         .scaledToFit()
                                         .frame(height: 45)
@@ -204,6 +204,21 @@ struct ContentView: View {
             return .red
         case .none:
             return .white
+        }
+    }
+    
+    func suitIcon(suit:Suits) -> String {
+        switch(suit){
+        case .spades:
+            return "suit.spade.fill"
+        case .clubs:
+            return "suit.club.fill"
+        case .hearts:
+            return "suit.heart.fill"
+        case .diamonds:
+            return "suit.diamond.fill"
+        case .none:
+            return "questionmark"
         }
     }
 }
