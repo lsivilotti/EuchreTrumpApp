@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PortraitView: View {
+    @Environment (\.colorScheme) var colorScheme
     enum Suits {
         case spades, clubs, hearts, diamonds, none
     }
@@ -18,12 +19,12 @@ struct PortraitView: View {
             Image(systemName: suitIcon(suit: trump))
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(.white)
+                .foregroundStyle(colorScheme == .dark ? .white : color(suit: trump))
             VStack {
                 Text("Euchre")
                     .font(.largeTitle)
                     .fontWeight(.black)
-                    .foregroundStyle(trump == .none ? Color(red: 0.4, green: 0.6, blue: 1) : Color(red: 0.7, green: 0.9, blue: 1))
+                    .foregroundStyle(Color(red: 0.2, green: 0.4, blue: 0.9))
                 Text("Trump is \(suitName(suit: trump))")
                     .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
                     .font(.title)
@@ -39,39 +40,35 @@ struct PortraitView: View {
                             title: { Text("Jack") },
                             icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("Jack") },
                             icon: { Image(systemName: coSuitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(Color(red: 0.5, green: 0.3, blue: 1))
-                        .fontWeight(.heavy)
+                        .foregroundStyle(.indigo)
+                        .fontWeight(.black)
                         Label(
                             title: { Text("Ace") },
                             icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("King") },
                             icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("Queen") },
                             icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("10") },
                             icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(color(suit: trump))
                         Label(
                             title: { Text("9") },
                             icon: { Image(systemName: suitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(color(suit: trump))
                     }
+                    .foregroundStyle(colorScheme == .dark ? color(suit: trump) : .white)
+                    .font(.system(size: 20))
                     Spacer()
                 }
                 .opacity(trump == .none ? 0.0 : 1)
@@ -88,7 +85,7 @@ struct PortraitView: View {
                 }
             }
         }
-        .background(color(suit: trump))
+        .background(colorScheme == .dark ? color(suit: trump) : .white)
     }
     
     func suitButton(suit:Suits) -> some View {
@@ -104,7 +101,7 @@ struct PortraitView: View {
                         .fontWeight(.black)
                         .font(.title)
                 }
-                .foregroundStyle(.white)
+                .foregroundStyle(colorScheme == .light ? .white : color(suit: suit))
             }
             .onTapGesture {
                 if(trump == suit) {
@@ -114,7 +111,7 @@ struct PortraitView: View {
                 }
             }
             .opacity(trump == suit ? 0.5 : 1)
-            .foregroundStyle(color(suit: suit))
+            .foregroundStyle(colorScheme == .light ? color(suit: suit) : .white)
     }
     
     func color(suit:Suits) -> Color {
@@ -124,7 +121,7 @@ struct PortraitView: View {
         case .hearts, .diamonds:
             return .red
         case .none:
-            return .white
+            return .black
         }
     }
     

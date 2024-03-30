@@ -47,7 +47,7 @@ struct LandscapeView: View {
                                 title: { Text("Jack") },
                                 icon: { Image(systemName: coSuitIcon(suit: trump)) }
                             )
-                            .foregroundStyle(Color(red: 0.5, green: 0.3, blue: 1))
+                            .foregroundStyle(.indigo)
                             .fontWeight(.heavy)
                             Label(
                                 title: { Text("Ace") },
@@ -92,7 +92,7 @@ struct LandscapeView: View {
                         .fontWeight(.black)
                         .font(.title)
                 }
-                .foregroundStyle(.white)
+                .foregroundStyle(colorScheme == .light ? .white : color(suit: suit))
             }
             .onTapGesture {
                 if(trump == suit) {
@@ -101,8 +101,8 @@ struct LandscapeView: View {
                     trump = suit
                 }
             }
-            .opacity(trump == suit ? 0.5 : 1)
-            .foregroundStyle(color(suit: suit))
+            .opacity(trump == suit ? 0.7 : 1)
+            .foregroundStyle(colorScheme == .light ? color(suit: suit) : .white)
     }
     
     func color(suit:Suits) -> Color {
@@ -112,7 +112,11 @@ struct LandscapeView: View {
         case .hearts, .diamonds:
             return .red
         case .none:
-            return .white
+            if colorScheme == .light {
+                return .black
+            } else {
+                return .white
+            }
         }
     }
     
