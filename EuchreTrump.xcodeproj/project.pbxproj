@@ -11,6 +11,8 @@
 		7C01BC692BB5F51F003F7DA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01BC682BB5F51F003F7DA9 /* ContentView.swift */; };
 		7C01BC6B2BB5F521003F7DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C01BC6A2BB5F521003F7DA9 /* Assets.xcassets */; };
 		7C01BC6E2BB5F521003F7DA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C01BC6D2BB5F521003F7DA9 /* Preview Assets.xcassets */; };
+		7CA8C1E02BB7BA1200294C95 /* PortraitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8C1DF2BB7BA1200294C95 /* PortraitView.swift */; };
+		7CA8C1E22BB7BA3600294C95 /* LandscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8C1E12BB7BA3600294C95 /* LandscapeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		7C01BC682BB5F51F003F7DA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7C01BC6A2BB5F521003F7DA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C01BC6D2BB5F521003F7DA9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7CA8C1DF2BB7BA1200294C95 /* PortraitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitView.swift; sourceTree = "<group>"; };
+		7CA8C1E12BB7BA3600294C95 /* LandscapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			children = (
 				7C01BC662BB5F51F003F7DA9 /* EuchreTrumpApp.swift */,
 				7C01BC682BB5F51F003F7DA9 /* ContentView.swift */,
+				7CA8C1DF2BB7BA1200294C95 /* PortraitView.swift */,
+				7CA8C1E12BB7BA3600294C95 /* LandscapeView.swift */,
 				7C01BC6A2BB5F521003F7DA9 /* Assets.xcassets */,
 				7C01BC6C2BB5F521003F7DA9 /* Preview Content */,
 			);
@@ -139,6 +145,8 @@
 			files = (
 				7C01BC692BB5F51F003F7DA9 /* ContentView.swift in Sources */,
 				7C01BC672BB5F51F003F7DA9 /* EuchreTrumpApp.swift in Sources */,
+				7CA8C1E22BB7BA3600294C95 /* LandscapeView.swift in Sources */,
+				7CA8C1E02BB7BA1200294C95 /* PortraitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
