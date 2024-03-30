@@ -7,7 +7,29 @@
 
 import SwiftUI
 
+struct DeviceRotationViewModifier: ViewModifier {
+    let action: (UIDeviceOrientation) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                action(UIDevice.current.orientation)
+            }
+    }
+}
+
+extension View {
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
+    }
+}
+/*previous 16 lines found on Hacking with Swift: How to detect device rotation
+ * https://www.hackingwithswift.com/quick-start/swiftui/how-to-detect-device-rotation
+ */
+
 struct ContentView: View {
+    @State var orientation: UIDeviceOrientation = UIDevice.current.orientation
     enum Suits {
         case spades, clubs, hearts, diamonds, none
     }
@@ -24,7 +46,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .fontWeight(.black)
                     .foregroundStyle(trump == .none ? Color(red: 0.4, green: 0.6, blue: 1) : Color(red: 0.7, green: 0.9, blue: 1))
-                Text("Trump is \(suitName(suit: trump))")
+                Text("Trump is \(suitName(suit: trump)) \(orientation.isPortrait)")
                     .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
                     .font(.title)
                     .background(Capsule().foregroundStyle(.white))
@@ -89,6 +111,9 @@ struct ContentView: View {
             }
         }
         .background(color(suit: trump))
+        .onRotate { newOrientation in
+            orientation = newOrientation
+        }
     }
     
     func suitButton(suit:Suits) -> some View {
