@@ -30,29 +30,39 @@ extension View {
 
 struct ContentView: View {
     @State var orientation: UIDeviceOrientation = UIDevice.current.orientation
+    @State var prevOrientation: UIDeviceOrientation = UIDevice.current.orientation
 
     var body: some View {
         Group {
             switch orientation {
             case .unknown:
-                PortraitView()
+                LandscapeView()
             case .portrait:
                 PortraitView()
             case .portraitUpsideDown:
-                LandscapeView()
+                PortraitView()
             case .landscapeLeft:
                 LandscapeView()
             case .landscapeRight:
                 LandscapeView()
             case .faceUp:
-                PortraitView()
+                if prevOrientation == .portrait || prevOrientation == .portraitUpsideDown {
+                    PortraitView()
+                } else {
+                    LandscapeView()
+                }
             case .faceDown:
-                PortraitView()
+                if prevOrientation == .portrait || prevOrientation == .portraitUpsideDown {
+                    PortraitView()
+                } else {
+                    LandscapeView()
+                }
             @unknown default:
-                PortraitView()
+                LandscapeView()
             }
         }
         .onRotate { newOrientation in
+            prevOrientation = orientation
             orientation = newOrientation
         }
     }

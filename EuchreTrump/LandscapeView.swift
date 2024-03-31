@@ -47,7 +47,7 @@ struct LandscapeView: View {
                                 title: { Text("Jack") },
                                 icon: { Image(systemName: coSuitIcon(suit: trump)) }
                             )
-                            .foregroundStyle(.indigo)
+                            .foregroundStyle(colorScheme == .dark ? Color(red: 1, green: 1, blue: 0) : .purple)
                             .fontWeight(.heavy)
                             Label(
                                 title: { Text("Ace") },
@@ -101,7 +101,7 @@ struct LandscapeView: View {
                     trump = suit
                 }
             }
-            .opacity(trump == suit ? 0.7 : 1)
+            .shadow(color: trump == suit ? .green : .clear, radius: 20)
             .foregroundStyle(colorScheme == .light ? color(suit: suit) : .white)
     }
     
@@ -112,11 +112,7 @@ struct LandscapeView: View {
         case .hearts, .diamonds:
             return .red
         case .none:
-            if colorScheme == .light {
-                return .black
-            } else {
-                return .white
-            }
+            return .green
         }
     }
     

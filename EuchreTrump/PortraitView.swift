@@ -25,11 +25,15 @@ struct PortraitView: View {
                     .font(.largeTitle)
                     .fontWeight(.black)
                     .foregroundStyle(Color(red: 0.2, green: 0.4, blue: 0.9))
-                Text("Trump is \(suitName(suit: trump))")
-                    .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
-                    .font(.title)
-                    .background(Capsule().foregroundStyle(.white))
-                    .foregroundStyle(.black)
+                HStack {
+                    Spacer()
+                    Text("Trump is \(suitName(suit: trump))")
+                        .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
+                        .font(.title)
+                        .foregroundStyle(.black)
+                    Spacer()
+                }
+                .background(.white)
                 Spacer()
                 HStack (spacing: 20) {
                     Spacer()
@@ -44,7 +48,7 @@ struct PortraitView: View {
                             title: { Text("Jack") },
                             icon: { Image(systemName: coSuitIcon(suit: trump)) }
                         )
-                        .foregroundStyle(.indigo)
+                        .foregroundStyle(colorScheme == .dark ? .purple : Color(red: 1, green: 1, blue: 0))
                         .fontWeight(.black)
                         Label(
                             title: { Text("Ace") },
@@ -92,16 +96,16 @@ struct PortraitView: View {
         return RoundedRectangle(cornerRadius: 25.0)
             .frame(width: 190, height: 50, alignment: .center)
             .overlay {
-                HStack {
-                    Image(systemName: suitIcon(suit: suit))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 45)
-                    Text(suitName(suit: suit).capitalized)
-                        .fontWeight(.black)
-                        .font(.title)
-                }
-                .foregroundStyle(colorScheme == .light ? .white : color(suit: suit))
+                    HStack {
+                        Image(systemName: suitIcon(suit: suit))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 45)
+                        Text(suitName(suit: suit).capitalized)
+                            .fontWeight(.black)
+                            .font(.title)
+                    }
+                    .foregroundStyle(colorScheme == .light ? .white : color(suit: suit))
             }
             .onTapGesture {
                 if(trump == suit) {
@@ -110,8 +114,8 @@ struct PortraitView: View {
                     trump = suit
                 }
             }
-            .opacity(trump == suit ? 0.5 : 1)
             .foregroundStyle(colorScheme == .light ? color(suit: suit) : .white)
+            .shadow(color: trump == suit ? .green : .clear, radius: 20)
     }
     
     func color(suit:Suits) -> Color {
@@ -121,7 +125,7 @@ struct PortraitView: View {
         case .hearts, .diamonds:
             return .red
         case .none:
-            return .black
+            return .green
         }
     }
     
