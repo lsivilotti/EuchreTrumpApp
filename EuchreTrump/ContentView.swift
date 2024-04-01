@@ -96,7 +96,7 @@ struct ContentView: View {
                     Spacer()
                     Divider()
                         .hidden()
-                    cardOrder()
+                    cardOrder(view: "portrait")
                         .foregroundStyle(colorScheme == .dark ? color(suit: trump) : .white)
                         .font(.system(size: 20))
                     Spacer()
@@ -135,7 +135,7 @@ struct ContentView: View {
                         .padding()
                 }
                 Spacer()
-                cardOrder()
+                cardOrder(view: "landscape")
                     .foregroundStyle(colorScheme == .dark && (trump == .spades || trump == .clubs) ? .white : color(suit: trump))
                     .font(.title)
                     .opacity(trump == .none ? 0.0 : 1)
@@ -169,7 +169,7 @@ struct ContentView: View {
             .foregroundStyle(colorScheme == .light ? color(suit: suit) : .white)
     }
     
-    func cardOrder() -> some View {
+    func cardOrder(view: String) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Label(
                 title: { Text("Jack") },
@@ -179,7 +179,7 @@ struct ContentView: View {
                 title: { Text("Jack") },
                 icon: { Image(systemName: coSuitIcon(suit: trump)) }
             )
-            .foregroundStyle(colorScheme == .dark ? Color(red: 1, green: 1, blue: 0) : .purple)
+            .foregroundStyle((view == "portrait" && colorScheme == .light)||(view == "landscape" && colorScheme == .dark) ? Color(red: 1, green: 1, blue: 0) : .purple)
             .fontWeight(.heavy)
             Label(
                 title: { Text("Ace") },
