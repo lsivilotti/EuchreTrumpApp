@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LandscapeView: View {
-    @Environment (\.colorScheme) var colorScheme
     enum Suits {
         case spades, clubs, hearts, diamonds, none
     }
-    @State var trump = Suits.none
-    
+    @State var trump : Suits = Suits.none
+    @Environment (\.colorScheme) var colorScheme
+
     var body: some View {
         VStack {
             Text("Euchre")
@@ -159,6 +159,10 @@ struct LandscapeView: View {
         case .none:
             return "undecided"
         }
+    }
+    
+    func getTrump() -> Suits {
+        return trump
     }
 }
 

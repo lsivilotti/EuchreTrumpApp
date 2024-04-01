@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct PortraitView: View {
-    @Environment (\.colorScheme) var colorScheme
     enum Suits {
         case spades, clubs, hearts, diamonds, none
     }
-    @State var trump = Suits.none
+    @State var trump : Suits = Suits.none
+    @Environment (\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {
@@ -172,6 +172,10 @@ struct PortraitView: View {
         case .none:
             return "undecided"
         }
+    }
+    
+    func getTrump() -> Suits {
+        return trump
     }
 }
 
