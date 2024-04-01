@@ -41,7 +41,7 @@ struct ContentView: View {
         Group {
             switch orientation {
             case .unknown:
-                landscape()
+                portrait()
             case .portrait:
                 portrait()
             case .portraitUpsideDown:
