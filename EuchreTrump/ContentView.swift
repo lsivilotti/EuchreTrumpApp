@@ -51,19 +51,19 @@ struct ContentView: View {
             case .landscapeRight:
                 landscape()
             case .faceUp:
-                if prevOrientation == .portrait || prevOrientation == .portraitUpsideDown {
+                if prevOrientation == .portrait {
                     portrait()
                 } else {
                     landscape()
                 }
             case .faceDown:
-                if prevOrientation == .portrait || prevOrientation == .portraitUpsideDown {
+                if prevOrientation == .portrait {
                     portrait()
                 } else {
                     landscape()
                 }
             @unknown default:
-                if prevOrientation == .portrait || prevOrientation == .portraitUpsideDown {
+                if prevOrientation == .portrait {
                     portrait()
                 } else {
                     landscape()
